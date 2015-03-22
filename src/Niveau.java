@@ -116,7 +116,7 @@ public class Niveau {
 		switch(this.getStatut()){
 		case DEBUTANT:
 			// ONLY need 6 months of practice
-			if(this.getExperience()  > 6){
+			if(this.getExperience()  >= 6){
 				setStatut(StatutEntreprise.INTERMEDIARE);
 				return true;
 			}
@@ -159,4 +159,9 @@ public class Niveau {
 		return false;
 	}
 
+	
+	public String toString(){
+		return this.getStatut() + "," + this.getExperience() + "," + this.getNbProjet();
+	}
+	
 }

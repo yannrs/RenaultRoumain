@@ -41,7 +41,7 @@ public class Projet {
 	public int getTempsEcoule() {
 		return tempsEcoule;
 	}
-	public void setTempsEcoule(int tempsEcoule) {
+	private void setTempsEcoule(int tempsEcoule) {
 		this.tempsEcoule = tempsEcoule;
 	}
 
@@ -142,7 +142,13 @@ public class Projet {
 		return s;		
 	}
 	public String toString(){
-		return "" + this.getTempsEcoule() + ";" + this.equipe;
+		String s = this.getTempsEcoule() + ";{;";
+		for(Salarie sal : this.getEquipe()){
+			s += sal.toString() + ";";
+		}
+		s+= ";}";
+		
+		return s;
 	}
 	
 }

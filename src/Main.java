@@ -26,6 +26,7 @@ public class Main {
 		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERT));
 		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERT));
 		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERT));
+		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERIMENTE));
 		
 		// Roumain - Debutant
 		eqRoumanie.addMember(new Salarie(Pays.ROUMANIE));
@@ -57,7 +58,8 @@ public class Main {
 		eqRoumanie.moisSuivant();
 		
 		// Calcul de la masse salarial
-		System.out.println("Masse salarial à l'instant " + temps + " est de : " + eqRoumanie.salaireMois());
+		System.out.println("Repartition salarial à l'instant " + temps + " est : " + eqRoumanie.toString());
+//		System.out.println("Masse salarial à l'instant " + temps + " est de : " + eqRoumanie.salaireMois());
 		
 		// Sauvegarde des paramètres importantes en fin de mois
 		saveEquipe(eqRoumanie, temps);
@@ -67,7 +69,7 @@ public class Main {
 	
 	public void Simu(){
 		temps = 0;
-		while(temps < 80 && eqRoumanie.nbParStatut(StatutEntreprise.EXPERIMENTE) <= 30){
+		while(temps < 200 && eqRoumanie.nbParStatut(StatutEntreprise.EXPERIMENTE) <= 30){
 			temps ++;
 			unMois();
 		}

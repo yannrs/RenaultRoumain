@@ -182,7 +182,16 @@ public class Equipe {
 			}
 			// else les recrues vont bientôt arriver!
 		}
-
+		if(!enviEXPERIMENTE){
+			// Embauche si pas assez de monde (niveau debutant)
+			if(nbParStatut(StatutEntreprise.INTERMEDIARE)<3) {
+				embauche(3-nbParStatut(StatutEntreprise.INTERMEDIARE));
+			}
+			if(nbParStatut(StatutEntreprise.DEBUTANT)<3) {
+				embauche(3-nbParStatut(StatutEntreprise.DEBUTANT));
+			}
+			// else les recrues vont bientôt arriver!
+		}
 
 	}
 
@@ -202,7 +211,7 @@ public class Equipe {
 			}
 		}
 		
-		// Distribution des tuteurs libre
+		// Distribution des tuteurs libres
 		// Dabord pour les employés Intermediaire
 		for(Salarie sal : this.equipe){
 			if(sal.getNiveau().getStatut() == StatutEntreprise.INTERMEDIARE && !sal.isOneTutorPresent()){
@@ -246,7 +255,7 @@ public class Equipe {
 		s += "nbParStatut(StatutEntreprise.INTERMEDIARE)" + ";";
 		s += "nbParStatut(StatutEntreprise.EXPERIMENTE)" + ";";
 		s += "nbParStatut(StatutEntreprise.EXPERT)" + ";";
-		s += "salaireMois()" + ";";
+//		s += "salaireMois()" + ";";
 
 		return s;		
 	}
@@ -261,7 +270,7 @@ public class Equipe {
 		s += nbParStatut(StatutEntreprise.INTERMEDIARE) + ";";
 		s += nbParStatut(StatutEntreprise.EXPERIMENTE) + ";";
 		s += nbParStatut(StatutEntreprise.EXPERT) + ";";
-		s += salaireMois() + ";";
+//		s += salaireMois() + ";";
 
 		return s;
 	}
