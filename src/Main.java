@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import Divers.Pays;
 import Divers.StatutEntreprise;
 
-
+/**
+ * Class principal de la Simulation !
+ * @author Yann RAVEL-SIBILLOT
+ *
+ */
 public class Main {
 	private Equipe eqFrance; // Not used first
 	private Equipe eqRoumanie;
@@ -23,6 +27,8 @@ public class Main {
 		
 		// Ajout des membres - Salariés
 		// Expartiés - Expert
+		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERT));
+		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERT));
 		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERT));
 		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERT));
 		eqRoumanie.addMember(new Salarie(Pays.FRANCE, StatutEntreprise.EXPERT));

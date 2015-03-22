@@ -1,5 +1,10 @@
 package Divers;
 
+/**
+ * Salaire type d'un employé de Renoult
+ * @author yann
+ *
+ */
 public enum Salaire {
 	ROUMAIN(25),
 	FRANCAIS(100),

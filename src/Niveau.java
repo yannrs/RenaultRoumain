@@ -2,7 +2,14 @@ import javax.swing.DebugGraphics;
 
 import Divers.StatutEntreprise;
 
-
+/**
+ * Définition du niveau d'une personne : 
+ * Experience de travail dans le groupe
+ * Le nombre de projet réalisé dans ce groupe
+ * Et son statut dans le groupe
+ * @author Yann RAVEL-SIBILLOT
+ *
+ */
 public class Niveau {
 	private int experience;
 	private StatutEntreprise statut;

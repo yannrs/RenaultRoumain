@@ -5,7 +5,11 @@ import Divers.Pays;
 import Divers.Salaire;
 import Divers.StatutEntreprise;
 
-
+/**
+ * Regroupement de l'ensemble des caractéristiques utiles d'un Salarié dans une entreprise
+ * @author Yann RAVEL-SIBILLOT
+ *
+ */
 public class Salarie {
 	/**Caracteristiques personnelle**/
 	private int id = Integer.parseInt(("" + (new Date()).getTime()).substring(0, 7));

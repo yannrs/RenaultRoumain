@@ -6,7 +6,11 @@ import org.w3c.dom.ls.LSInput;
 import Divers.Salaire;
 import Divers.StatutEntreprise;
 
-
+/**
+ * Regroupement de l'ensemble des projets d'une unitée de Research and Development
+ * @author Yann RAVEL-SIBILLOT
+ *
+ */
 public class ResAndDev {
 	private ArrayList<Projet> ensembleProjet;
 	private Equipe refPersonnel;

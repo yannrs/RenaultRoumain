@@ -2,7 +2,12 @@ import java.util.ArrayList;
 
 import Divers.StatutEntreprise;
 
-
+/**
+ * Class définissant les éléments importants constituants un projet
+ * Une équipe + le temps déjà écoulé depuis le début du projet
+ * @author Yann RAVEL-SIBILLOT
+ *
+ */
 public class Projet {
 	private ArrayList<Salarie> equipe; // TODO diviser l'équipe en 2 parties (Niveau 2 et Niveau 3/4)
 	private int tempsEcoule;

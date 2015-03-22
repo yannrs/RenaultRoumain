@@ -3,7 +3,11 @@ import java.util.ArrayList;
 import Divers.Pays;
 import Divers.StatutEntreprise;
 
-
+/**
+ * Rassemblement de l'ensemble des Salariés travaillant dans une unité de Recherche et Developpement
+ * @author yann
+ *
+ */
 public class Equipe {
 	private ArrayList<Salarie> equipe;
 	private Pays localisation;
@@ -93,6 +97,7 @@ public class Equipe {
 		}
 	}
 
+	
 	/*******Comptage équipe********/
 	public int nbParStatut(StatutEntreprise statut){
 		int i = 0;
@@ -112,7 +117,17 @@ public class Equipe {
 		return s;
 	}
 
-
+	
+	/*******Etat équipe********/
+	public int isSomebodyNoWorks(){
+		int i = 0;
+		for(Salarie sal : this.getEquipe()){
+			if(!sal.isOnOneProject() && sal.getNiveau().getExperience()>=(6+6.5*12)) i++;
+		}
+		
+		return i;
+	}
+	
 	/*******Simulation********/
 	/**
 	 * Ajoute l'expérience et promeut si possible
@@ -193,6 +208,9 @@ public class Equipe {
 			// else les recrues vont bientôt arriver!
 		}
 
+//		int salNoWorks = isSomebodyNoWorks();
+//		if(salNoWorks > 0 && nbParStatut(StatutEntreprise.DEBUTANT) < 15) embauche(salNoWorks);
+		
 	}
 
 	
@@ -212,7 +230,7 @@ public class Equipe {
 		}
 		
 		// Distribution des tuteurs libres
-		// Dabord pour les employés Intermediaire
+		// D'abord pour les employés Intermediaire
 		for(Salarie sal : this.equipe){
 			if(sal.getNiveau().getStatut() == StatutEntreprise.INTERMEDIARE && !sal.isOneTutorPresent()){
 				if(!tuteurEXPERIMENTE.isEmpty()){

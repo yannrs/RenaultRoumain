@@ -2,7 +2,12 @@ import Divers.Pays;
 import Divers.Sexe;
 import Divers.SituationFamilial;
 
-
+/**
+ * Class regroupement les caractéristiques pouvant influencé la carrière d'une personne
+ * Age ; Sexe ; Situation familial ; Pays d'origine Origine 
+ * @author Yann RAVEL-SIBILLOT
+ *
+ */
 public class Personne {
 	private int age; // en mois
 	private Sexe sexe;
