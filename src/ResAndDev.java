@@ -15,7 +15,11 @@ public class ResAndDev {
 	private ArrayList<Projet> ensembleProjet;
 	private Equipe refPersonnel;
 
-
+	// Methode d'embauche
+	private boolean METHOD1 = true;
+	private boolean METHOD2 = true;
+	private boolean METHOD3 = true;
+	
 	/****************************/
 	/*  	  CONSTRUCTEUR  	*/
 	/****************************/
@@ -49,7 +53,36 @@ public class ResAndDev {
 		this.refPersonnel = refPersonnel;
 	}
 
+	public boolean isMETHOD1() {
+		return METHOD1;
+	}
+	public void setMETHOD1() {
+		METHOD1 = true;
+	}
+	public void unSetMETHOD1() {
+		METHOD1 = false;
+	}
 
+	public boolean isMETHOD2() {
+		return METHOD2;
+	}
+	public void setMETHOD2() {
+		METHOD2 = true;
+	}
+	public void unSetMETHOD2() {
+		METHOD2 = false;
+	}
+	
+
+	public boolean isMETHOD3() {
+		return METHOD3;
+	}
+	public void setMETHOD3() {
+		METHOD3 = true;
+	}
+	public void unSetMETHOD3() {
+		METHOD3 = false;
+	}
 	/****************************/
 	/*  		METHODES  		*/
 	/****************************/
@@ -175,6 +208,68 @@ public class ResAndDev {
 		return listPr;
 	}
 
+	/*******Embauche : si possible********/
+	public void embauche(){
+		// Personne restante après la création des potentiels projets
+		ArrayList<Salarie> freePersonne = getFreePersonal();
+		int nbDEBUTANT = 0;
+		int nbINTERMEDIAIRE = 0;
+		int nbEXPERIMENTE = 0;
+		int nbEXPERT = 0;
+		int nbTUTEUR = 0;
+
+		for( Salarie sal : freePersonne){
+			switch(sal.getNiveau().getStatut()){
+			case DEBUTANT:
+				nbDEBUTANT ++;
+				break;
+			case INTERMEDIARE:
+				nbINTERMEDIAIRE ++;
+				break;
+			case EXPERIMENTE:
+				nbEXPERIMENTE ++;
+				if(sal.isOneEleveCanAdd()) nbTUTEUR += sal.NBMAXELEVE - sal.nbEleve();
+				break;
+			case EXPERT:
+				nbEXPERT ++;
+				if(sal.isOneEleveCanAdd()) nbTUTEUR += sal.NBMAXELEVE - sal.nbEleve();
+				break;
+			default:
+				break;
+			}
+		}
+
+		// Si des equipes ne vont pas pouvoir se constituer pour former un projet, on embauche
+		int nbEmbaucheDEBUTANT = 0;	
+		
+		if(METHOD1){
+			// Si des tuteurs vont rester librent, on embauche
+			if(nbTUTEUR - getRefPersonnel().nbParStatut(StatutEntreprise.DEBUTANT)> 0){
+				nbEmbaucheDEBUTANT = (nbTUTEUR - getRefPersonnel().nbParStatut(StatutEntreprise.DEBUTANT));
+//				System.out.println("Add !1 : " + nbEmbaucheDEBUTANT);
+			}
+		}
+
+		if(METHOD2){
+			// Suffisament de personnel de niveau intermédiaire pour occuper tout le monde
+			if( nbINTERMEDIAIRE % 4 != 0 ||  ((nbINTERMEDIAIRE % 4) + nbDEBUTANT + nbEmbaucheDEBUTANT) % 4 != 0){
+				nbEmbaucheDEBUTANT += 4 - (((nbINTERMEDIAIRE % 4) + nbDEBUTANT + nbEmbaucheDEBUTANT) % 4) ;
+//				System.out.println("Add !2 : " + nbEmbaucheDEBUTANT);
+//				System.out.println("normalement nbEmbaucheDebutant est un multiple de 4 : " + (nbEmbaucheDEBUTANT % 4 ) );
+			}
+		}
+		
+		if(METHOD3){
+			if(nbEXPERIMENTE + nbEXPERT > 0 && 4*(nbEXPERIMENTE + nbEXPERT) - (nbDEBUTANT + nbEmbaucheDEBUTANT) >= 0){
+				nbEmbaucheDEBUTANT += 4*(nbEXPERIMENTE + nbEXPERT) - (nbDEBUTANT + nbEmbaucheDEBUTANT);
+//				System.out.println("Add !3 : " + nbEmbaucheDEBUTANT);
+			}			
+		}
+		
+		getRefPersonnel().embauche(nbEmbaucheDEBUTANT);		
+	}
+	
+	
 	/*******Simulation********/
 	public void oneMonth(){
 		// Add one month to every project

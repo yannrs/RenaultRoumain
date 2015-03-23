@@ -12,6 +12,8 @@ public class Projet {
 	private ArrayList<Salarie> equipe; // TODO diviser l'équipe en 2 parties (Niveau 2 et Niveau 3/4)
 	private int tempsEcoule;
 	private static final int TempsMaxProjet = 30;
+	
+	private boolean DEBUG = false;
 
 	/****************************/
 	/*  	  CONSTRUCTEUR  	*/
@@ -113,7 +115,7 @@ public class Projet {
 			return true;
 		}
 		else{
-			System.out.println("[Projet] Le projet ne peut pas continuer : manque de personnel");
+			if(DEBUG) System.out.println("[Projet] Le projet ne peut pas continuer : manque de personnel");
 			return false;
 		}
 	}

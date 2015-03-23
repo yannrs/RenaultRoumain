@@ -12,6 +12,8 @@ public class Equipe {
 	private ArrayList<Salarie> equipe;
 	private Pays localisation;
 
+	private int maxSizeEquipe = 30;
+	private boolean enableMaxSizeEquipe = true;
 
 	/****************************/
 	/*  	  CONSTRUCTEUR  	*/
@@ -45,7 +47,24 @@ public class Equipe {
 		this.localisation = localisation;
 	}
 
+	public int getMaxSizeEquipe() {
+		return maxSizeEquipe;
+	}
+	public void setMaxSizeEquipe(int maxSizeEquipe) {
+		this.maxSizeEquipe = maxSizeEquipe;
+	}
 
+
+	public boolean isEnableMaxSizeEquipe() {
+		return enableMaxSizeEquipe;
+	}
+	public void EnableMaxSizeEquipe() {
+		this.enableMaxSizeEquipe = true;
+	}
+	public void DisableMaxSizeEquipe() {
+		this.enableMaxSizeEquipe = false;
+	}
+	
 	/****************************/
 	/*  		METHODES  		*/
 	/****************************/
@@ -71,14 +90,30 @@ public class Equipe {
 		return (i<numberOfMember() && i>=0 ? this.equipe.get(i) : null);
 	}
 
+	
 	/*******Gestion augmentation équipe********/
 	public void embauche(){
 		addMember(new Salarie(getLocalisation()));
 	}
 
 	public void embauche(int nb){
-		for(int i = 0; i<nb; i++){
-			addMember(new Salarie(getLocalisation()));
+		if(enableMaxSizeEquipe){
+			int nbActuel = numberOfMember();
+			if(maxSizeEquipe >= nbActuel + nb){
+				for(int i = 0; i<nb; i++){
+					addMember(new Salarie(getLocalisation()));
+				}
+			}
+			else{
+				for(int i = 0; i<(maxSizeEquipe - nbActuel); i++){
+					addMember(new Salarie(getLocalisation()));
+				}
+			}
+		}
+		else{
+			for(int i = 0; i<nb; i++){
+				addMember(new Salarie(getLocalisation()));
+			}
 		}
 	}
 
@@ -187,9 +222,40 @@ public class Equipe {
 				break;
 			}
 		}
+		
+		
+		gestionEmbauche(enviINTERMEDIAIRE, enviEXPERIMENTE);
+//
+//		// -- Embauche ?
+//		if(!enviINTERMEDIAIRE){
+//			// Embauche si pas assez de monde (niveau debutant)
+//			if(nbParStatut(StatutEntreprise.DEBUTANT)<4) {
+//				embauche(4-nbParStatut(StatutEntreprise.DEBUTANT));
+//			}
+//			// else les recrues vont bientôt arriver!
+//		}
+//		if(!enviEXPERIMENTE){
+//			// Embauche si pas assez de monde (niveau debutant)
+//			if(nbParStatut(StatutEntreprise.INTERMEDIARE)<3) {
+//				embauche(3-nbParStatut(StatutEntreprise.INTERMEDIARE));
+//			}
+//			if(nbParStatut(StatutEntreprise.DEBUTANT)<3) {
+//				embauche(3-nbParStatut(StatutEntreprise.DEBUTANT));
+//			}
+//			// else les recrues vont bientôt arriver!
+//		}
+
+//		int salNoWorks = isSomebodyNoWorks();
+//		if(salNoWorks > 0 && nbParStatut(StatutEntreprise.DEBUTANT) < 15) embauche(salNoWorks);
+		
+	}
 
 
-		// -- Embauche ?
+	/*******Gestion des Embauches********/
+	public boolean gestionEmbauche(boolean enviINTERMEDIAIRE, boolean enviEXPERIMENTE){
+
+		// -- S'il n'y a pas assez de personne de niveau Intermédiaire pour faire progresser les autres
+		// FIXME : pb de temps (6 mois pour que les nouveaux arrivent
 		if(!enviINTERMEDIAIRE){
 			// Embauche si pas assez de monde (niveau debutant)
 			if(nbParStatut(StatutEntreprise.DEBUTANT)<4) {
@@ -197,22 +263,23 @@ public class Equipe {
 			}
 			// else les recrues vont bientôt arriver!
 		}
-		if(!enviEXPERIMENTE){
-			// Embauche si pas assez de monde (niveau debutant)
-			if(nbParStatut(StatutEntreprise.INTERMEDIARE)<3) {
-				embauche(3-nbParStatut(StatutEntreprise.INTERMEDIARE));
-			}
-			if(nbParStatut(StatutEntreprise.DEBUTANT)<3) {
-				embauche(3-nbParStatut(StatutEntreprise.DEBUTANT));
-			}
-			// else les recrues vont bientôt arriver!
-		}
+//		if(!enviEXPERIMENTE){
+//			// Embauche si pas assez de monde (niveau debutant)
+//			if(nbParStatut(StatutEntreprise.INTERMEDIARE)<3) {
+//				embauche(3-nbParStatut(StatutEntreprise.INTERMEDIARE));
+//			}
+//			if(nbParStatut(StatutEntreprise.DEBUTANT)<3) {
+//				embauche(3-nbParStatut(StatutEntreprise.DEBUTANT));
+//			}
+//			// else les recrues vont bientôt arriver!
+//		}
 
-//		int salNoWorks = isSomebodyNoWorks();
-//		if(salNoWorks > 0 && nbParStatut(StatutEntreprise.DEBUTANT) < 15) embauche(salNoWorks);
 		
+		
+		
+		return true;
 	}
-
+	
 	
 
 	/*******Gestion des tuteurs********/
