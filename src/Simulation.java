@@ -172,11 +172,11 @@ public class Simulation {
 		
 		
 		// Risque psychosociaux ?
-		
+		eqRoumanie.turnOver((Math.random() > 0.5 ? true: false));
 		
 		// Embauche ?
 //		eqRoumanie.gestionEmbauche(enviINTERMEDIAIRE, enviEXPERIMENTE) // déjà fait dans moisSuivant()
-		prRoumanie.embauche();
+		if(temps % 3 == 0) prRoumanie.embauche();
 		
 		// Sauvegarde des paramètres importantes en fin de mois
 		saveEquipe(eqRoumanie, temps);

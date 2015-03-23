@@ -12,18 +12,10 @@ public class Optimisation {
 	int maxEXPERIMENTE = 3;
 	int maxEXPERT = 20;
 	
+	
+	
 	public void optimisationSalaire(){
 		Simulation s = new Simulation();
-		
-//		int minDEBUTANT = 0;
-//		int minINTERMEDIAIRE = 0;
-//		int minEXPERIMENTE = 0;
-//		int minEXPERT = 0;
-//		
-//		int maxDEBUTANT = 5;
-//		int maxINTERMEDIAIRE = 2;
-//		int maxEXPERIMENTE = 2;
-//		int maxEXPERT = 7;
 		
 		int minMasseSalarial = Integer.MAX_VALUE;
 		int maxMasseSalarial = 0;
@@ -82,16 +74,6 @@ public class Optimisation {
 	public void optimisationTemps(){
 		Simulation s = new Simulation();
 		
-//		int minDEBUTANT = 0;
-//		int minINTERMEDIAIRE = 0;
-//		int minEXPERIMENTE = 0;
-//		int minEXPERT = 0;
-//		
-//		int maxDEBUTANT = 5;
-//		int maxINTERMEDIAIRE = 2;
-//		int maxEXPERIMENTE = 2;
-//		int maxEXPERT = 7;
-		
 		int minTemps = Integer.MAX_VALUE;
 		int maxTemps = 0;
 		int[] configMin = { 0, 0, 0, 0};
@@ -148,8 +130,7 @@ public class Optimisation {
 
 	public void optimisationTempsSalaire(int gainTemps, int gainSalaire){
 		Simulation s = new Simulation();
-		
-		
+				
 		int minTemps = Integer.MAX_VALUE;
 		int maxTemps = 1;
 		int minMasseSalarial = Integer.MAX_VALUE;
@@ -220,7 +201,7 @@ public class Optimisation {
 	public void essaiModele(){
 		Simulation s = new Simulation();
 		s.setDEBUG();
-		s.initial(0, 0, 1, 2);
+		s.initial(0, 0, 0, 5);
 		s.getPrRoumanie().setMETHOD1();
 		s.getPrRoumanie().setMETHOD2();
 		s.getPrRoumanie().setMETHOD3();

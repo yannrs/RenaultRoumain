@@ -243,7 +243,7 @@ public class ResAndDev {
 		int nbEmbaucheDEBUTANT = 0;	
 		
 		if(METHOD1){
-			// Si des tuteurs vont rester librent, on embauche
+			// Si des tuteurs vont rester libre, on embauche
 			if(nbTUTEUR - getRefPersonnel().nbParStatut(StatutEntreprise.DEBUTANT)> 0){
 				nbEmbaucheDEBUTANT = (nbTUTEUR - getRefPersonnel().nbParStatut(StatutEntreprise.DEBUTANT));
 //				System.out.println("Add !1 : " + nbEmbaucheDEBUTANT);
@@ -260,8 +260,8 @@ public class ResAndDev {
 		}
 		
 		if(METHOD3){
-			if(nbEXPERIMENTE + nbEXPERT > 0 && 4*(nbEXPERIMENTE + nbEXPERT) - (nbDEBUTANT + nbEmbaucheDEBUTANT) >= 0){
-				nbEmbaucheDEBUTANT += 4*(nbEXPERIMENTE + nbEXPERT) - (nbDEBUTANT + nbEmbaucheDEBUTANT);
+			if(nbEXPERIMENTE + nbEXPERT > 0 && 4*(nbEXPERIMENTE + nbEXPERT) - (nbINTERMEDIAIRE + nbDEBUTANT + nbEmbaucheDEBUTANT) >= 0){
+				nbEmbaucheDEBUTANT += 4*(nbEXPERIMENTE + nbEXPERT) - (nbINTERMEDIAIRE + nbDEBUTANT + nbEmbaucheDEBUTANT);
 //				System.out.println("Add !3 : " + nbEmbaucheDEBUTANT);
 			}			
 		}

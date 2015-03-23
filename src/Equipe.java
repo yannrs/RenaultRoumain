@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import Divers.Pays;
 import Divers.StatutEntreprise;
@@ -15,6 +16,8 @@ public class Equipe {
 	private int maxSizeEquipe = 30;
 	private boolean enableMaxSizeEquipe = true;
 
+	private int maxEmbaucheMmTemps = 5;
+	
 	/****************************/
 	/*  	  CONSTRUCTEUR  	*/
 	/****************************/
@@ -64,6 +67,13 @@ public class Equipe {
 	public void DisableMaxSizeEquipe() {
 		this.enableMaxSizeEquipe = false;
 	}
+
+	public int getMaxEmbaucheMmTemps() {
+		return maxEmbaucheMmTemps;
+	}
+	public void setMaxEmbaucheMmTemps(int maxEmbaucheMmTemps) {
+		this.maxEmbaucheMmTemps = maxEmbaucheMmTemps;
+	}
 	
 	/****************************/
 	/*  		METHODES  		*/
@@ -99,6 +109,9 @@ public class Equipe {
 	public void embauche(int nb){
 		if(enableMaxSizeEquipe){
 			int nbActuel = numberOfMember();
+			
+			if(nb > getMaxEmbaucheMmTemps()) nb = getMaxEmbaucheMmTemps();
+			
 			if(maxSizeEquipe >= nbActuel + nb){
 				for(int i = 0; i<nb; i++){
 					addMember(new Salarie(getLocalisation()));
@@ -133,7 +146,16 @@ public class Equipe {
 	}
 
 	
-	public void turnOver(){
+	public void turnOver(boolean envi){
+		
+		Iterator<Salarie> listep = this.getEquipe().iterator();
+		while(listep.hasNext()){
+			Salarie sal = listep.next();
+			if(sal.turnOver((envi ? (double)(Math.random()*0.5) : (double)(Math.random()*2) )) > (envi ? 0.95 : 0.80)){
+				System.out.println("Une personne en moins ...");
+				listep.remove();
+			}
+		}
 		
 	}
 	
@@ -227,7 +249,7 @@ public class Equipe {
 			}
 		}
 		
-		
+		turnOver(enviINTERMEDIAIRE);
 		gestionEmbauche(enviINTERMEDIAIRE, enviEXPERIMENTE);
 //
 //		// -- Embauche ?

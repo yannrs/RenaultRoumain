@@ -168,6 +168,22 @@ public class Salarie {
 		this.getPerso().inccAGEMois();
 	}
 	
+	/*******Gestion tutorat********/
+	public double turnOver(double envi){
+		switch(this.getNiveau().getStatut()){
+		case DEBUTANT:
+			return this.getPerso().etatPsycho(envi*1.5);
+		case INTERMEDIARE:
+			return this.getPerso().etatPsycho(envi*2);
+		case EXPERIMENTE:
+			return this.getPerso().etatPsycho(envi);
+		case EXPERT:
+			return this.getPerso().etatPsycho(0.01);	
+		default:
+			return 0.0;
+		}		
+	}
+	
 	/*******Sauvegarde Salarié********/
 	public String titretoString(){		
 		String s = "";
