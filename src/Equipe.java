@@ -133,6 +133,10 @@ public class Equipe {
 	}
 
 	
+	public void turnOver(){
+		
+	}
+	
 	/*******Comptage équipe********/
 	public int nbParStatut(StatutEntreprise statut){
 		int i = 0;
