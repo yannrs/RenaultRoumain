@@ -141,10 +141,11 @@ public class Projet {
 	
 	/*******Gestion sauvegarede Projet********/
 	public String titretoString(){
-		String s = "";
+		String s = ";;";
 
 		s += "TempsEcoulé" + ";";
-		s += this.equipe.get(0).titretoString();
+		s += "Composition" + ";";
+		//s += this.equipe.get(0).titretoString();
 		
 		return s;		
 	}

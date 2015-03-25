@@ -51,9 +51,14 @@ public class Personne {
 		this.etat = (Math.random() > 0.9 ? EtatPsychologique.Suicidaire : EtatPsychologique.Deprime);
 	}
 
+	
 	/****************************/
 	/*  	GETTER & SETTER  	*/
 	/****************************/
+	/**
+	 * Obtenu en année
+	 * @return
+	 */
 	public int getAge() {
 		return (int) age/12;
 	}	
@@ -88,9 +93,18 @@ public class Personne {
 	public void setEtat(EtatPsychologique etat) {
 		this.etat = etat;
 	}
-	public void Etat() {
-		this.etat = etat;
+	
+	public int getTempsInactif() {
+		return tempsInactif;
 	}
+	public void inccTempsInactif() {
+		tempsInactif++;
+	}
+	
+	public void setTempsInactif(int tempsInactif) {
+		this.tempsInactif = tempsInactif;
+	}
+
 
 	/****************************/
 	/*  		METHODES  		*/
@@ -100,7 +114,7 @@ public class Personne {
 	}
 
 	/**
-	 * 
+	 * Estime la probabilité de quitter l'entreprise pour une personne donnée
 	 * @param environnement // 
 	 * @return
 	 */
@@ -108,6 +122,7 @@ public class Personne {
 		double entropie = Math.random();
 		double etat = environnement*this.getEtat().getStat() ; // 0 équilibré -> 1 Suicidaire
 
+		// Changement d'état potentiel
 		if(etat > 0.75 ) inccEtat();
 		if(etat < 0.15 ) deccEtat();
 		

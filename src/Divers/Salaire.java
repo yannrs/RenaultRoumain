@@ -21,6 +21,10 @@ public enum Salaire {
 		return this.sal;
 	}
 	
+	public int getMontant(int temps, float taux){
+		return (int) (this.sal/(Math.pow((1+taux), temps/(double)12)));
+	}
+	
 	public String toString(){
 		return "" + this.sal;
 	}

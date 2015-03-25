@@ -14,11 +14,13 @@ import Divers.StatutEntreprise;
 public class ResAndDev {
 	private ArrayList<Projet> ensembleProjet;
 	private Equipe refPersonnel;
+	private int nombreProjet;
 
 	// Methode d'embauche
 	private boolean METHOD1 = true;
 	private boolean METHOD2 = true;
 	private boolean METHOD3 = true;
+	
 	
 	/****************************/
 	/*  	  CONSTRUCTEUR  	*/
@@ -83,12 +85,25 @@ public class ResAndDev {
 	public void unSetMETHOD3() {
 		METHOD3 = false;
 	}
+
+	public int getNombreProjet() {
+		return nombreProjet;
+	}
+	public void iccNombreProjet() {
+		this.nombreProjet ++;
+	}
+	public void deccNombreProjet() {
+		this.nombreProjet --;
+	}
+	
+	
 	/****************************/
 	/*  		METHODES  		*/
 	/****************************/
 
 	/*******Gestion Projet********/	
 	public void addProjet(Projet pr){
+		iccNombreProjet();
 		this.getEnsembleProjet().add(pr);
 	}
 
@@ -228,11 +243,11 @@ public class ResAndDev {
 				break;
 			case EXPERIMENTE:
 				nbEXPERIMENTE ++;
-				if(sal.isOneEleveCanAdd()) nbTUTEUR += sal.NBMAXELEVE - sal.nbEleve();
+				if(sal.isOneEleveCanAdd()) nbTUTEUR += Simulation.NBMAXELEVE - sal.nbEleve();
 				break;
 			case EXPERT:
 				nbEXPERT ++;
-				if(sal.isOneEleveCanAdd()) nbTUTEUR += sal.NBMAXELEVE - sal.nbEleve();
+				if(sal.isOneEleveCanAdd()) nbTUTEUR += Simulation.NBMAXELEVE - sal.nbEleve();
 				break;
 			default:
 				break;
@@ -285,6 +300,7 @@ public class ResAndDev {
 				for(Salarie sal : pr.getEquipe()){
 					sal.setOnNoOneProject();
 				}
+				iccNombreProjet();
 				lispr.remove();
 			};
 		}
@@ -313,6 +329,29 @@ public class ResAndDev {
 	/*******Sauvegarde/Affichage********/
 	public String toString(){
 		String s = "[;";
+		for(Projet pr : this.ensembleProjet){
+			s += pr.toString() + ";";
+		}		
+		s+= ";]";
+		
+		return s;
+	}
+	
+	public String toStringTitre(){
+		String s = "";
+		s += " Nombre Projet fini" + ";";
+		s += " Nombre de Projet en cours" + ";";
+		s += (new Projet()).titretoString();
+		
+		return s;
+	}
+	
+	public String toStringSave(){
+		String s = "";
+		s += "" + getNombreProjet() + ";";
+		s += "" + numberOfProjet() + ";";
+		
+		s += "[;";
 		for(Projet pr : this.ensembleProjet){
 			s += pr.toString() + ";";
 		}		

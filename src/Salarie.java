@@ -11,17 +11,20 @@ import Divers.StatutEntreprise;
  *
  */
 public class Salarie {
+	
 	/**Caracteristiques personnelle**/
 	private int id = Integer.parseInt(("" + (new Date()).getTime()).substring(0, 7));
 	private Personne perso;	// Object
 	private Niveau niveau; // Object
 	
 	/**Paramètres simulation**/
+	// Tuteur
 	private Salarie tuteur = null; // Object
 	private ArrayList<Salarie> eleve = new ArrayList<Salarie>();
-	public final static int NBMAXELEVE = 4;
 	
+	// Projet
 	private boolean isOnOneProject = false;
+	
 	
 
 	/****************************/
@@ -52,11 +55,9 @@ public class Salarie {
 		this(new Personne(age), niveau);
 	}
 
-
 	public Salarie(Personne perso, Niveau niveau) {
 		this(perso, niveau, null);
 	}
-
 
 	public Salarie(Personne perso, Niveau niveau, Salarie tuteur) {
 		super();
@@ -77,8 +78,7 @@ public class Salarie {
 		this.perso = perso;
 	}
 
-	public Salaire getSalaire(Pays localisation) {
-		
+	public Salaire getSalaire(Pays localisation) {		
 		switch(localisation){
 		case FRANCE:
 			System.out.println("[Warning] Salaire : Roumain en France");
@@ -125,13 +125,14 @@ public class Salarie {
 		this.isOnOneProject = false;
 	}
 
-	/****************************/
-	/*  		METHODES  		*/
-	/****************************/
-
 	public boolean isOneTutorPresent(){
 		return this.getTuteur() != null;
 	}
+	
+	
+	/****************************/
+	/*  		METHODES  		*/
+	/****************************/
 	
 	/*******Gestion tutorat********/
 	public void deleteEleve(Salarie sal){
@@ -147,10 +148,16 @@ public class Salarie {
 	}
 	
 	public boolean isOneEleveCanAdd(){
-		return nbEleve() < NBMAXELEVE;
+		return nbEleve() < Simulation.NBMAXELEVE;
 	}
 	
+	
 	/*******Evolution********/
+	/**
+	 * Augmentation du grade de la personne si possible
+	 * @param Environnement
+	 * @param tuteur
+	 */
 	public void inccStatut(boolean Environnement, Salarie tuteur){
 		if(this.getNiveau().inccStatut(Environnement, tuteur) && this.isOneTutorPresent()){
 			this.tuteur.deleteEleve(this);
@@ -158,27 +165,38 @@ public class Salarie {
 		}
 	}
 	
+	
 	/*******Simulation********/
 	/**
 	 * Si l'environnement est bon, on augmente l'expérience et l'age, sinon que l'age
 	 * @param profitable
 	 */
 	public void moisSuivant(boolean profitable){
+		// Ajout de l'expérience acquise par une personne
 		if(profitable) this.getNiveau().inccExperience();
+		else this.getPerso().inccTempsInactif();
+		
+		// Devient plus vieux ...
 		this.getPerso().inccAGEMois();
 	}
 	
-	/*******Gestion tutorat********/
+	
+	/*******Gestion TurnOver********/
+	/**
+	 * Calcul le turnOver associé à une personne provoqué par l'environnement
+	 * @param envi
+	 * @return
+	 */
 	public double turnOver(double envi){
 		switch(this.getNiveau().getStatut()){
 		case DEBUTANT:
 			return this.getPerso().etatPsycho(envi*1.5);
 		case INTERMEDIARE:
-			return this.getPerso().etatPsycho(envi*2);
+			return this.getPerso().etatPsycho(envi*2);	// Plus d'influence pour les niveaux Intermédiaires
 		case EXPERIMENTE:
 			return this.getPerso().etatPsycho(envi);
 		case EXPERT:
-			return this.getPerso().etatPsycho(0.01);	
+			return this.getPerso().etatPsycho(0.01); // Très faible	pour les experts
 		default:
 			return 0.0;
 		}		
